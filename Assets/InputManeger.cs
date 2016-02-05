@@ -36,13 +36,13 @@ public class InputManeger : MonoBehaviour {
             SceneManager.LoadScene( 0 );
             SaveStatus();
         }
-        if( Input.GetKeyDown( KeyCode.M ) )
+        if( Input.GetKeyDown( KeyCode.M ) && !PoolReference.TableScene[EnumInPool.TaskCanvas.ToString()].activeSelf )
         {
             Camera go = GameObject.FindGameObjectWithTag( "Map" ).GetComponent<Camera>();
             go.enabled = !go.enabled;
         }
 
-        if( Input.GetKeyDown( KeyCode.P ) )
+        if( Input.GetKeyDown( KeyCode.P ) && !PoolReference.TableScene[EnumInPool.TaskCanvas.ToString()].activeSelf )
         {
             if( !PoolReference.TableScene[EnumInPool.TaskCanvas.ToString()].activeSelf )//|| PoolReference.TableScene[EnumInPool.TaskCanvas.ToString()].GetComponent<Canvas>().enabled
                 PoolReference.TableScene[EnumInPool.SkillManeger.ToString()].GetComponent<SkillManeger>().DoneButton();
