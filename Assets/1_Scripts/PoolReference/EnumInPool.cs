@@ -4,7 +4,10 @@ using System.Collections;
 public enum EnumInPool
 {
     SkillManeger,
+    SkillsCanvas,
     FightCanvas,
     FightManeger,
-    TaskCanvas
+    TaskCanvas,
+    InputManeger
+
 }

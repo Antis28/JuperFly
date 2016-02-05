@@ -9,7 +9,8 @@ public class SkillManeger : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        SkillsCanvasEnabled = PoolReference.TableScene[EnumInPool.SkillManeger.ToString()].GetComponent<Canvas>();
+       
+        SkillsCanvasEnabled = PoolReference.TableScene[EnumInPool.SkillsCanvas.ToString()].GetComponent<Canvas>();
         _playerSkills = new PlayerSkills();
     }
 

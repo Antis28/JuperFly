@@ -4,60 +4,23 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class DeathTrigger : MonoBehaviour
-{
-
-    public Text coinText;
-    public Text flyText;
-    public TaskManeger tm;
-    public GameObject hero;
-    PoolR poolr;
-
+{   
+    public GameObject hero;   
     bool isSave = true;
 
     void Start()
     {
-        poolr = GameObject.Find( "PoolReference" ).GetComponent<PoolR>();
-    }
-
-    void Update()
-    {
-        if( Input.GetKeyDown( KeyCode.R ) )
-        {
-            if( PoolReference.TableScene[EnumInPool.TaskCanvas.ToString()].activeSelf == false )
-            {
-                SaveStatus();
-                //Application.LoadLevel (Application.loadedLevel);
-                SceneManager.LoadScene( "MiniGame_2" );
-            }
-        }
-        if( Input.GetKeyDown( KeyCode.Escape ) )
-        {
-            //Application.LoadLevel( 0 );
-            SceneManager.LoadScene( 0 );
-            SaveStatus();
-        }
-        if( Input.GetKeyDown( KeyCode.M ) )
-        {
-            Camera go = GameObject.FindGameObjectWithTag( "Map" ).GetComponent<Camera>();
-            go.enabled = !go.enabled;
-        }
-
-        if( Input.GetKeyDown( KeyCode.P ) )
-        {                       
-            if( !PoolReference.TableScene[EnumInPool.TaskCanvas.ToString()].activeSelf || PoolReference.TableScene[EnumInPool.TaskCanvas.ToString()].GetComponent<Canvas>().enabled)
-            PoolReference.TableScene[EnumInPool.SkillManeger.ToString()].GetComponent<SkillManeger>().DoneButton();
-        }
-
-    }
+        
+    }    
 
     void OnTriggerEnter2D( Collider2D other )
     {
 
-        if( other.gameObject.CompareTag( "Player" ) || other.name == "hero" )
+        if( other.gameObject.CompareTag( "Player" ) )//|| other.name == "hero"
         {
             if( isSave )
             {
-                SaveStatus();
+                PoolReference.TableScene[EnumInPool.InputManeger.ToString()].GetComponent<InputManeger>().SaveStatus();                
                 Application.LoadLevel( Application.loadedLevel );
             }
         }
@@ -67,19 +30,5 @@ public class DeathTrigger : MonoBehaviour
         }
 
     }
-    void SaveStatus()
-    {
-        PoolReference.TableScene.Clear(); //Очистка ключей
-
-        SaveStats ss = new SaveStats();
-        ss.SaveStatistik( coinText.text, "Coin" );
-
-        ss.SaveStatistik( flyText.text, "Fly" );
-        if( tm.numTask > 1 )
-            ss.SaveStatistik( tm.numTask.ToString(), "NumberTask" );
-
-        Debug.Log( "Save Complite" );
-        isSave = false;
-
-    }
+   
 }
