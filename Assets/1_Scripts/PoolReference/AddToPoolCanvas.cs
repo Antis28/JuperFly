@@ -26,17 +26,17 @@ public class AddToPoolCanvas : MonoBehaviour
             try
             {
                 PoolReference.TableScene.Add( TaskCanvas.name, TaskCanvas.gameObject );
-                print( TaskCanvas.name );
+                //print( TaskCanvas.name );
             } catch( ArgumentException ) { print( "Такой ключ уже существует: " + TaskCanvas.name ); }
             try
             {
                 PoolReference.TableScene.Add( SkilsCanvas.name, SkilsCanvas.gameObject );
-                print( SkilsCanvas.name );
+                //print( SkilsCanvas.name );
             } catch( ArgumentException ) { print( "Такой ключ уже существует: " + SkilsCanvas.name ); }
             try
             {
                 PoolReference.TableScene.Add( FightCanvas.name, FightCanvas.gameObject );
-                print( FightCanvas.name );
+               // print( FightCanvas.name );
             } catch( ArgumentException ) { print( "Такой ключ уже существует: " + FightCanvas.name ); }
 
 

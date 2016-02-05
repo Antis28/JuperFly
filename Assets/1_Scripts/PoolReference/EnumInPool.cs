@@ -8,6 +8,8 @@ public enum EnumInPool
     FightCanvas,
     FightManeger,
     TaskCanvas,
-    InputManeger
+    InputManeger,
+    CoinText,
+    BonusFlyText
 
 }

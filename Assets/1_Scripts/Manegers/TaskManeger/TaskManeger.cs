@@ -158,7 +158,7 @@ public class TaskManeger : MonoBehaviour
         }
     }
     public void BackMenu()
-    {
+    {        
         VisibleTaskMainMenu();
         VisibleTask();
         panelImage.sprite = panelImageOriginal;
@@ -184,7 +184,7 @@ public class TaskManeger : MonoBehaviour
         }
         Shop shop = poolr.shop;
         shop.simplePC.enabled = !shop.simplePC.enabled;
-
+        
         poolr.GameCanvas.gameObject.SetActive(!poolr.GameCanvas.gameObject.activeSelf);
         //poolr.TaskCanvas.gameObject.SetActive(!poolr.TaskCanvas.gameObject.activeSelf);
         PoolReference.TableScene[EnumInPool.TaskCanvas.ToString()].SetActive( 
