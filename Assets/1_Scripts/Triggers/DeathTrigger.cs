@@ -23,7 +23,7 @@ public class DeathTrigger : MonoBehaviour
     {
         if( Input.GetKeyDown( KeyCode.R ) )
         {
-            if( poolr.TaskCanvas.gameObject.activeSelf == false )
+            if( PoolReference.TableScene[EnumInPool.TaskCanvas.ToString()].activeSelf == false )
             {
                 SaveStatus();
                 //Application.LoadLevel (Application.loadedLevel);

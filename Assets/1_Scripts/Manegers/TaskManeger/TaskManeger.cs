@@ -34,7 +34,8 @@ public class TaskManeger : MonoBehaviour
         costTask = 10;
         poolr = GameObject.Find("PoolReference").GetComponent<PoolR>();
 
-        poolr.TaskCanvas.gameObject.SetActive(false);
+        //poolr.TaskCanvas.gameObject.SetActive(false);
+        PoolReference.TableScene[EnumInPool.TaskCanvas.ToString()].SetActive( false );
         poolr.TaskNumber.enabled = false;
 
         if (!File.Exists(putTaskBase))
@@ -185,7 +186,10 @@ public class TaskManeger : MonoBehaviour
         shop.simplePC.enabled = !shop.simplePC.enabled;
 
         poolr.GameCanvas.gameObject.SetActive(!poolr.GameCanvas.gameObject.activeSelf);
-        poolr.TaskCanvas.gameObject.SetActive(!poolr.TaskCanvas.gameObject.activeSelf);
+        //poolr.TaskCanvas.gameObject.SetActive(!poolr.TaskCanvas.gameObject.activeSelf);
+        PoolReference.TableScene[EnumInPool.TaskCanvas.ToString()].SetActive( 
+                                 !PoolReference.TableScene[EnumInPool.TaskCanvas.ToString()].activeSelf 
+                                                                            );
         //Debug.Log ("TakeExit()");
 
     }

@@ -45,7 +45,7 @@ public class PoolR : MonoBehaviour
     public Button     exitButton;
     [HideInInspector]
     public Button     BackButton;
-    public Canvas   TaskCanvas;    
+    //public Canvas   TaskCanvas;    
     public Canvas   GameCanvas;    
     [HideInInspector]
     public Text       FlyTextTask;
@@ -92,7 +92,7 @@ public class PoolR : MonoBehaviour
         BonusImageTask = GameObject.Find( "BonusImageTask" ).GetComponent<Image>();
         AnswerInputField = GameObject.Find( "AnswerInputField" ).GetComponent<InputField>();
 
-        TaskCanvas = GameObject.Find( "TaskCanvas" ).GetComponent<Canvas>();
+        //TaskCanvas = GameObject.Find( "TaskCanvas" ).GetComponent<Canvas>();
         TaskNumber = GameObject.Find( "TaskNumber" ).GetComponent<Text>();
         taskHeaderText = GameObject.Find( "TaskHeader" ).GetComponent<Text>();
         taskText = GameObject.Find( "TaskText" ).GetComponent<Text>();

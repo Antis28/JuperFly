@@ -17,8 +17,8 @@ public class Shop : MonoBehaviour {
 		poolr = GameObject.Find("PoolReference").GetComponent<PoolR>();
 		simplePC		= poolr.simplePlatformContoroler;
 		GameCanvas		= poolr.GameCanvas;
-		TaskCanvas		= poolr.TaskCanvas;
-		shopTextGO = poolr.ShopText.gameObject;
+		TaskCanvas		= PoolReference.TableScene[EnumInPool.TaskCanvas.ToString()].GetComponent<Canvas>();
+        shopTextGO = poolr.ShopText.gameObject;
 		shopTextGO.SetActive (false); 
 
 
