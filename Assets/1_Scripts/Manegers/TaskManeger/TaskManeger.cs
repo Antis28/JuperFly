@@ -76,9 +76,6 @@ public class TaskManeger : MonoBehaviour
         StopCoroutine(ChekKey());
     }
 
-
-
-
     private void Answer()
     {
         if (!isAnswer)
