@@ -15,7 +15,7 @@ public class PlayerSkills : Skills
 
         set
         {
-            if (_experience > _remainToUp)
+            if( _experience > _remainToUp )
                 LevelUp();
             else
                 _experience = value;
@@ -23,31 +23,37 @@ public class PlayerSkills : Skills
     }
 
     public override int Level
-    { get; set; }  
+    { get; set; }
 
     public PlayerSkills()
     {
         Inicialization(); // Запускается перед первым обращением к Amount
         Point = 5;
-        Level = 1; 
+        Level = 1;
     }
 
     void Inicialization()
     {
-        while (PointExpText == null)
+        PoolReference.TableScene["SkillsCanvas"].SetActive( true );
+        while( PointExpText == null )
         {
-            try {
-                strengthNumText  = PoolReference.TableScene["strengthNumText"].GetComponent<Text>();
+            try
+            {
+                strengthNumText = PoolReference.TableScene["strengthNumText"].GetComponent<Text>();
                 intellectNumText = PoolReference.TableScene["intellectNumText"].GetComponent<Text>();
-                speedNumText     = PoolReference.TableScene["speedNumText"].GetComponent<Text>();
+                speedNumText = PoolReference.TableScene["speedNumText"].GetComponent<Text>();
 
 
                 PointExpText = PoolReference.TableScene["PointExpText"].GetComponent<Text>();
                 PointExpText.text = Point.ToString();
+            } catch( KeyNotFoundException )
+            {
+                MonoBehaviour.print( "Inicialization в PlayerSkills не удалась. \nпроверьте ссылки в TableScene.\nПроверить addToPool на объектах.\n" );
+                
+                break;
             }
-            catch(KeyNotFoundException)
-            { MonoBehaviour.print("Inicialization в PlayerSkills не удалась. \nпроверьте ссылки в TableScene.\nПроверить addToPool на объектах.\n"); break; }
         }
+        PoolReference.TableScene["SkillsCanvas"].SetActive( false );
 
     }
 
@@ -58,17 +64,17 @@ public class PlayerSkills : Skills
     {
         Level++;
         RevertEnabledButton();
-        Point = POINT; 
-        MonoBehaviour.print("LevelUp для PlayerSkills.\nLevel = " + Level);
-       
-    }
-    public void addIntellect()  { if (Point > 0) { Intellect++; Point--; }  else RevertEnabledButton(); }
-    public void addSpeed() {    if (Point > 0) { Speed++; Point--;          }  else RevertEnabledButton(); }
-    public void addStrength() { if (Point > 0) { Strength++; Point--;    }  else RevertEnabledButton(); }
+        Point = POINT;
+        MonoBehaviour.print( "LevelUp для PlayerSkills.\nLevel = " + Level );
 
-    public void removeIntellect()   { if (Intellect > 0) {    Intellect--; Point++; } else RevertEnabledButton(); }
-    public void removeSpeed()       { if (Speed > 0)     {    Speed--; Point++; } else RevertEnabledButton(); }
-    public void removeStrength()    { if (Strength > 0)  {    Strength--; Point++; } else RevertEnabledButton(); }
+    }
+    public void addIntellect() { if( Point > 0 ) { Intellect++; Point--; } else RevertEnabledButton(); }
+    public void addSpeed() { if( Point > 0 ) { Speed++; Point--; } else RevertEnabledButton(); }
+    public void addStrength() { if( Point > 0 ) { Strength++; Point--; } else RevertEnabledButton(); }
+
+    public void removeIntellect() { if( Intellect > 0 ) { Intellect--; Point++; } else RevertEnabledButton(); }
+    public void removeSpeed() { if( Speed > 0 ) { Speed--; Point++; } else RevertEnabledButton(); }
+    public void removeStrength() { if( Strength > 0 ) { Strength--; Point++; } else RevertEnabledButton(); }
 
 
 

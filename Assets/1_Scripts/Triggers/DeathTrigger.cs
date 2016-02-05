@@ -43,7 +43,10 @@ public class DeathTrigger : MonoBehaviour
         }
 
         if( Input.GetKeyDown( KeyCode.P ) )
-            PoolReference.TableScene["SkilsCanvas"].GetComponent<SkillManeger>().DoneButton();
+        {                       
+            if( !PoolReference.TableScene[EnumInPool.TaskCanvas.ToString()].activeSelf || PoolReference.TableScene[EnumInPool.TaskCanvas.ToString()].GetComponent<Canvas>().enabled)
+            PoolReference.TableScene[EnumInPool.SkillManeger.ToString()].GetComponent<SkillManeger>().DoneButton();
+        }
 
     }
 

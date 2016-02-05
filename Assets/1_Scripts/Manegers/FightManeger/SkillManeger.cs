@@ -5,11 +5,11 @@ using UnityEngine.UI;
 public class SkillManeger : MonoBehaviour {
 
     public PlayerSkills _playerSkills;
-    Canvas canvasEnabled;
+    Canvas SkillsCanvasEnabled;
 
     // Use this for initialization
     void Start () {
-        canvasEnabled = PoolReference.TableScene["SkilsCanvas"].GetComponent<Canvas>();
+        SkillsCanvasEnabled = PoolReference.TableScene[EnumInPool.SkillManeger.ToString()].GetComponent<Canvas>();
         _playerSkills = new PlayerSkills();
     }
 
@@ -25,6 +25,9 @@ public class SkillManeger : MonoBehaviour {
 
     public void DoneButton()
     {
-        canvasEnabled.enabled = !canvasEnabled.enabled;
+        if( !SkillsCanvasEnabled.gameObject.activeSelf)
+            SkillsCanvasEnabled.gameObject.SetActive( true );
+        SkillsCanvasEnabled.enabled = !SkillsCanvasEnabled.enabled;
+        
     }
 }
