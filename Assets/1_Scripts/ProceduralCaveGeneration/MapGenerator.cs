@@ -36,6 +36,9 @@ public class MapGenerator : MonoBehaviour {
         {
             SmoothMap();
         }
+
+
+
     }
 
     void RandomFillMap()
