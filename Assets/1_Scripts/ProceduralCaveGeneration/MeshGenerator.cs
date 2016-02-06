@@ -1,10 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class MeshGenerator : MonoBehaviour
 {
 
     public SquareGrid squareGrid;
+    List<Vector3> vertices;
+    List<int> triangles;
 
     public void GenerateMesh( int[,] map, float squareSize )
     {
@@ -158,7 +161,19 @@ public class MeshGenerator : MonoBehaviour
     }
     void MeshFromPoints( params Node[] points )
     {
+        AssignVertices( points );
+    }
 
+    void AssignVertices(Node[] points )
+    {
+        for( int i = 0; i < points.Length; i++ )
+        {
+            if( points[i].vertexIndex == -1 )
+            {
+                points[i].vertexIndex = vertices.Count;
+                vertices.Add( points[i].position ); 
+            }
+        }
     }
 
     void OnDrawGizmos()
