@@ -61,7 +61,11 @@ public class MeshGenerator : MonoBehaviour
             {
                 for (int y = 0; y < nodeCountY; y++)
                 {
-                    Vector3 pos = new Vector3(-mapWidth / 2 + x * squareSize + squareSize / 2, 0, -mapHeight / 2 + y * squareSize + squareSize / 2);
+                    Vector3 pos = new Vector3(
+                                                -mapWidth / 2 + x * squareSize + squareSize / 2, 
+                                                0, 
+                                                -mapHeight / 2 + y * squareSize + squareSize / 2
+                                                );
                     controlNodes[x, y] = new ControlNode(pos, map[x, y] == 1, squareSize);
                 }
             }
@@ -80,9 +84,10 @@ public class MeshGenerator : MonoBehaviour
 
     public class Square
     {
-
         public ControlNode topLeft, topRight, bottomRight, bottomLeft;
         public Node centreTop, centreRight, centreBottom, centreLeft;
+        //Lesson 3
+
 
         public Square(ControlNode _topLeft, ControlNode _topRight, ControlNode _bottomRight, ControlNode _bottomLeft)
         {
