@@ -193,7 +193,7 @@ public class WingsItems : Items
            // MonoBehaviour.print("FlyEnabled() в Amount > 0");
             _visibleItem.SetActive(true);
             itemTextGC.text = Amount.ToString();
-            if (Input.GetKeyDown(KeyCode.F))
+            if (Input.GetKeyDown(KeyCode.F) && !PoolReference.TableScene[EnumInPool.TaskCanvas.ToString()].activeSelf )
                 isFly = true;
             Fly();
         }
@@ -201,9 +201,7 @@ public class WingsItems : Items
         {
             //MonoBehaviour.print("FlyEnabled() в else" + "\n Amount = " + Amount);
             _visibleItem.SetActive(false);
-        }
-        
-        //Fly();
+        }     
     }
 
     void Fly()

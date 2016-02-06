@@ -6,15 +6,17 @@ public class AddToPool : MonoBehaviour {
 
     //PoolReference pool;   
 	// Use this for initialization
-	void Awake () {        
+	void Awake () {
 
         try
-        {            
-            PoolReference.TableScene.Add(name.ToString(), gameObject);            
-        }
-        catch(NullReferenceException )
         {
-            print("Нет ссылки на объект ");
+            PoolReference.TableScene.Add( name.ToString(), gameObject );
+        } catch( NullReferenceException )
+        {
+            print( "Нет ссылки на объект " );
+        } catch( ArgumentException ex )
+        {
+            print( "Такой ключ уже существует: "  + this.name);
         }
     }
 }

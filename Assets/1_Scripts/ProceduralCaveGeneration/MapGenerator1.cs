@@ -36,6 +36,7 @@ public class MapGenerator1 : MonoBehaviour {
         {
             SmoothMap();
         }
+        
     }
 
     void RandomFillMap()
@@ -61,6 +62,10 @@ public class MapGenerator1 : MonoBehaviour {
         }
 
     }
+
+    //Гладкость карты  neighbourTiles < 4  до 7
+    public int SmoothMapNum_1 = 4;
+    public int SmoothMapNum_2 = 4;
     void SmoothMap()
     {
         for (int x = 0; x < width; x++)
@@ -69,9 +74,9 @@ public class MapGenerator1 : MonoBehaviour {
             {
                 int neighbourTiles = GetSurroundingWallCount(x,y);
 
-                if (neighbourTiles > 4)
+                if (neighbourTiles > SmoothMapNum_1 )
                     map[x, y] = 1;
-                else if (neighbourTiles < 4)
+                else if (neighbourTiles < SmoothMapNum_2 )
                     map[x, y] = 0;
             }
         }

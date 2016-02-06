@@ -31,7 +31,7 @@ public class BonusControler : MonoBehaviour {
             }
             catch (ArgumentException)
             {
-                print("Oбъект уже добавлен ");
+                print( "Oбъект CoinItems уже добавлен " );
             }
         }
         PoolReference.items_D = items_D;

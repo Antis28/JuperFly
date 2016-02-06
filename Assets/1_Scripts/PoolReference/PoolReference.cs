@@ -6,7 +6,10 @@ public static  class PoolReference
 {
     //public static Hashtable TableScene = new Hashtable(1);
     public static System.Collections.Generic.Dictionary<string, GameObject> TableScene = new System.Collections.Generic.Dictionary<string, GameObject>(1);
+
     public static System.Collections.Generic.Dictionary<string, Items> items_D;
+
+    
 
 
     public static void showPool()
