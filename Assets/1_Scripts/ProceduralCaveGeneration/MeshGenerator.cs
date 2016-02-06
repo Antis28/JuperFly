@@ -13,6 +13,9 @@ public class MeshGenerator : MonoBehaviour
     {
         squareGrid = new SquareGrid( map, squareSize );
 
+        vertices = new List<Vector3>();
+        triangles = new List<int>();
+
         for( int x = 0; x < squareGrid.squares.GetLength( 0 ); x++ )
         {
             for( int y = 0; y < squareGrid.squares.GetLength( 1 ); y++ )
@@ -20,7 +23,14 @@ public class MeshGenerator : MonoBehaviour
                 TriangulateSqure( squareGrid.squares[x, y] );
             }
         }
-    }
+
+        Mesh mesh = new Mesh();
+        GetComponent<MeshFilter>().mesh = mesh;
+
+        mesh.vertices = vertices.ToArray();
+        mesh.triangles = triangles.ToArray();
+        mesh.RecalculateNormals();
+    }    
 
     void TriangulateSqure( Square square )
     {
@@ -53,72 +63,76 @@ public class MeshGenerator : MonoBehaviour
                 break;
             case 8:
                 MeshFromPoints(
-                    square.topRight,
-                    square.centreLeft,
-                    square.centreTop
+                    square.topLeft,
+                    square.centreTop,
+                    square.centreLeft
+                    
                     );
                 break;
 
             // 2 points
             case 3:
                 MeshFromPoints(
-                    square.bottomLeft,
-                    square.centreLeft,
                     square.centreRight,
-                    square.bottomRight
+                    square.bottomRight,
+                    square.bottomLeft,
+                    square.centreLeft
                     );
                 break;
             case 5:
                 MeshFromPoints(
-                    square.bottomLeft,
-                    square.centreBottom,
-                    square.centreLeft,
-                    square.centreRight,
+                    square.centreTop,
                     square.topRight,
-                    square.centreTop );
+                    square.centreRight,
+                    square.centreBottom,
+                    square.bottomLeft,                    
+                    square.centreLeft
+                     );
                 break;
             case 6:
                 MeshFromPoints(
-                    square.topRight,
-                    square.bottomRight,
                     square.centreTop,
-                    square.centreBottom );
+                    square.topRight,
+                    square.bottomRight,                    
+                    square.centreBottom 
+                    );
                 break;
             case 9:
                 MeshFromPoints(
                     square.topLeft,
-                    square.bottomLeft,
                     square.centreTop,
-                    square.centreBottom
+                    square.centreBottom,
+                    square.bottomLeft
                     );
                 break;
             case 10:
                 MeshFromPoints(
                     square.topLeft,
                     square.centreTop,
-                    square.centreLeft,
                     square.centreRight,
                     square.centreBottom,
-                    square.bottomRight
+                    square.bottomLeft,                    
+                    square.centreLeft
+
                     );
                 break;
             case 12:
                 MeshFromPoints(
                     square.topLeft,
                     square.topRight,
-                    square.centreLeft,
-                    square.centreRight
+                    square.centreRight,
+                    square.centreLeft
                     );
                 break;
 
             // 3 points
-            case 7:
+            case 7:  
                 MeshFromPoints(
-                    square.topRight,
                     square.centreTop,
-                    square.centreLeft,
+                    square.topRight,
+                    square.bottomRight,
                     square.bottomLeft,
-                    square.bottomRight
+                    square.centreLeft
                     );
                 break;
             case 11:
@@ -126,8 +140,8 @@ public class MeshGenerator : MonoBehaviour
                     square.topLeft,
                     square.centreTop,
                     square.centreRight,
-                    square.bottomLeft,
-                    square.bottomRight
+                    square.bottomRight,
+                    square.bottomLeft
                     );
                 break;
             case 13:
@@ -135,26 +149,28 @@ public class MeshGenerator : MonoBehaviour
                     square.topLeft,
                     square.topRight,
                     square.centreRight,
-                    square.bottomLeft,
-                    square.centreBottom
+                    square.centreBottom,
+                    square.bottomLeft                    
                     );
                 break;
             case 14:
                 MeshFromPoints(
                     square.topLeft,
                     square.topRight,
-                    square.centreLeft,                    
-                    square.centreBottom,
-                    square.bottomRight
+                    square.bottomRight,
+                     square.centreBottom,
+                    square.centreLeft
+                    
+                   
+                    
                     );
                 break;
             case 15:
                 MeshFromPoints(
                     square.topLeft,
                     square.topRight,
-                    square.bottomLeft,
                     square.bottomRight,
-                    square.centreBottom
+                    square.bottomLeft
                     );
                 break;
         }
@@ -185,13 +201,14 @@ public class MeshGenerator : MonoBehaviour
             }
         }
     }
+
     void CreateTriangle(Node a, Node b, Node c)
     {
         triangles.Add( a.vertexIndex );
         triangles.Add( b.vertexIndex );
         triangles.Add( c.vertexIndex );
     }
-
+    /*
     void OnDrawGizmos()
     {
         if( squareGrid != null )
@@ -224,7 +241,7 @@ public class MeshGenerator : MonoBehaviour
             }
         }
     }
-
+    */
     public class SquareGrid
     {
         public Square[,] squares;
