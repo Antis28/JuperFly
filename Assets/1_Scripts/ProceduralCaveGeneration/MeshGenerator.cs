@@ -159,9 +159,19 @@ public class MeshGenerator : MonoBehaviour
                 break;
         }
     }
+
     void MeshFromPoints( params Node[] points )
     {
         AssignVertices( points );
+
+        if( points.Length >= 3 )
+            CreateTriangle( points[0], points[1], points[2] );
+        if( points.Length >= 4 )
+            CreateTriangle( points[0], points[2], points[3] );
+        if( points.Length >= 5 )
+            CreateTriangle( points[0], points[3], points[4] );
+        if( points.Length >= 6 )
+            CreateTriangle( points[0], points[4], points[5] );
     }
 
     void AssignVertices(Node[] points )
@@ -171,9 +181,15 @@ public class MeshGenerator : MonoBehaviour
             if( points[i].vertexIndex == -1 )
             {
                 points[i].vertexIndex = vertices.Count;
-                vertices.Add( points[i].position ); 
+                vertices.Add( points[i].position ); //points[i] - ошибка
             }
         }
+    }
+    void CreateTriangle(Node a, Node b, Node c)
+    {
+        triangles.Add( a.vertexIndex );
+        triangles.Add( b.vertexIndex );
+        triangles.Add( c.vertexIndex );
     }
 
     void OnDrawGizmos()
