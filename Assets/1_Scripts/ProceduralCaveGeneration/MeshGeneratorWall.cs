@@ -26,15 +26,14 @@ public class MeshGeneratorWall : MonoBehaviour
 
         Mesh mesh = new Mesh();
         GetComponent<MeshFilter>().mesh = mesh;
-        
-        
+
 
         mesh.vertices = vertices.ToArray();
         mesh.triangles = triangles.ToArray();
         mesh.RecalculateNormals();
 
-       
-    }    
+
+    }
 
     void TriangulateSqure( Square square )
     {
@@ -46,23 +45,24 @@ public class MeshGeneratorWall : MonoBehaviour
             // 1 points
             case 1:
                 MeshFromPoints(
+                    square.centreLeft,
                     square.centreBottom,
-                    square.bottomLeft,
-                    square.centreLeft
+                    square.bottomLeft
+
                     );
                 break;
             case 2:
                 MeshFromPoints(
-                    square.centreRight,
                     square.bottomRight,
-                    square.centreBottom
+                    square.centreBottom,
+                    square.centreRight
                     );
                 break;
             case 4:
                 MeshFromPoints(
-                    square.centreTop,
                     square.topRight,
-                    square.centreRight
+                     square.centreRight,
+                    square.centreTop                   
                     );
                 break;
             case 8:
@@ -70,7 +70,7 @@ public class MeshGeneratorWall : MonoBehaviour
                     square.topLeft,
                     square.centreTop,
                     square.centreLeft
-                    
+
                     );
                 break;
 
@@ -89,7 +89,7 @@ public class MeshGeneratorWall : MonoBehaviour
                     square.topRight,
                     square.centreRight,
                     square.centreBottom,
-                    square.bottomLeft,                    
+                    square.bottomLeft,
                     square.centreLeft
                      );
                 break;
@@ -97,8 +97,8 @@ public class MeshGeneratorWall : MonoBehaviour
                 MeshFromPoints(
                     square.centreTop,
                     square.topRight,
-                    square.bottomRight,                    
-                    square.centreBottom 
+                    square.bottomRight,
+                    square.centreBottom
                     );
                 break;
             case 9:
@@ -115,7 +115,7 @@ public class MeshGeneratorWall : MonoBehaviour
                     square.centreTop,
                     square.centreRight,
                     square.centreBottom,
-                    square.bottomLeft,                    
+                    square.bottomLeft,
                     square.centreLeft
 
                     );
@@ -130,7 +130,7 @@ public class MeshGeneratorWall : MonoBehaviour
                 break;
 
             // 3 points
-            case 7:  
+            case 7:
                 MeshFromPoints(
                     square.centreTop,
                     square.topRight,
@@ -154,7 +154,7 @@ public class MeshGeneratorWall : MonoBehaviour
                     square.topRight,
                     square.centreRight,
                     square.centreBottom,
-                    square.bottomLeft                    
+                    square.bottomLeft
                     );
                 break;
             case 14:
@@ -164,9 +164,9 @@ public class MeshGeneratorWall : MonoBehaviour
                     square.bottomRight,
                      square.centreBottom,
                     square.centreLeft
-                    
-                   
-                    
+
+
+
                     );
                 break;
             case 15:
@@ -194,7 +194,7 @@ public class MeshGeneratorWall : MonoBehaviour
             CreateTriangle( points[0], points[4], points[5] );
     }
 
-    void AssignVertices(Node[] points )
+    void AssignVertices( Node[] points )
     {
         for( int i = 0; i < points.Length; i++ )
         {
@@ -206,7 +206,7 @@ public class MeshGeneratorWall : MonoBehaviour
         }
     }
 
-    void CreateTriangle(Node a, Node b, Node c)
+    void CreateTriangle( Node a, Node b, Node c )
     {
         triangles.Add( a.vertexIndex );
         triangles.Add( b.vertexIndex );
