@@ -61,7 +61,7 @@ public class MeshGeneratorWall : MonoBehaviour
             case 4:
                 MeshFromPoints(
                     square.topRight,
-                     square.centreRight,
+                    square.centreRight,
                     square.centreTop                   
                     );
                 break;
@@ -70,11 +70,11 @@ public class MeshGeneratorWall : MonoBehaviour
                     square.topLeft,
                     square.centreTop,
                     square.centreLeft
-
                     );
                 break;
 
             // 2 points
+
             case 3:
                 MeshFromPoints(
                     square.centreRight,
@@ -114,8 +114,8 @@ public class MeshGeneratorWall : MonoBehaviour
                     square.topLeft,
                     square.centreTop,
                     square.centreRight,
+                    square.bottomRight,
                     square.centreBottom,
-                    square.bottomLeft,
                     square.centreLeft
 
                     );
