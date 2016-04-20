@@ -36,8 +36,8 @@ public class MapGenerator : MonoBehaviour {
         {
             SmoothMap();
         }
-
-        int borderSize = 10;
+        // Для изменения отступа от края карты
+        int borderSize = 1;
         int[,] borderedMap = new int[width + borderSize * 2, height + borderSize * 2];
 
         for( int x = 0; x < borderedMap.GetLength(0); x++ )
