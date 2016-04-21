@@ -206,7 +206,7 @@ public class MapGenerator : MonoBehaviour
         List<Coord> line = GetLine( tileA, tileB );
         foreach( Coord c in line )
         {
-            DrawCircle( c, 1 );// Здесь изменяется размер соеденяющих коридоров.
+            DrawCircle( c, 5 );// Здесь изменяется размер соеденяющих коридоров.
         }
     }
 
