@@ -63,7 +63,7 @@ public class MapGenerator : MonoBehaviour
         MeshGenerator meshGen = GetComponent<MeshGenerator>();
         meshGen.GenerateMesh( map, 1 );
         */
-        MeshGeneratorWall meshGen = GetComponent<MeshGeneratorWall>();
+        MeshGenerator meshGen = GetComponent<MeshGenerator>();
         meshGen.GenerateMesh( borderedMap, 1 );
     }
 
@@ -180,13 +180,13 @@ public class MapGenerator : MonoBehaviour
 
             if( possibleConnectionFound && !forceAccessibilityFromMainRoom )
             {
-                CreatePassge( bestRoomA, bestRoomB, bestTileA, bestTileB );
+                CreatePassage( bestRoomA, bestRoomB, bestTileA, bestTileB );
             }
         }
 
         if( possibleConnectionFound && forceAccessibilityFromMainRoom )
         {
-            CreatePassge( bestRoomA, bestRoomB, bestTileA, bestTileB );
+            CreatePassage( bestRoomA, bestRoomB, bestTileA, bestTileB );
             ConnectedClosestRoom( allRooms, true );
         }
 
@@ -198,7 +198,7 @@ public class MapGenerator : MonoBehaviour
 
 
 
-    void CreatePassge( Room roomA, Room roomB, Coord tileA, Coord tileB )
+    void CreatePassage( Room roomA, Room roomB, Coord tileA, Coord tileB )
     {
         Room.ConnectRooms( roomA, roomB );
         Debug.DrawLine( CoordToWorldPoint( tileA ), CoordToWorldPoint( tileB ), Color.green, 5 );
@@ -250,7 +250,7 @@ public class MapGenerator : MonoBehaviour
         {
             inverted = true;
             longest = Mathf.Abs( dy );
-            longest = Mathf.Abs( dx );
+            shortest = Mathf.Abs( dx );
 
             step = Math.Sign( dy );
             gradientStep = Math.Sign( dx );
