@@ -110,14 +110,14 @@ public class MapGenerator : MonoBehaviour
         ConnectedClosestRoom( survivingRooms );
     }
 
-    void ConnectedClosestRoom( List<Room> allRooms, bool  forceAccessibilityFromMainRoom = false)
+    void ConnectedClosestRoom( List<Room> allRooms, bool forceAccessibilityFromMainRoom = false )
     {
         List<Room> roomListA = new List<Room>();
         List<Room> roomListB = new List<Room>();
 
         if( forceAccessibilityFromMainRoom )
         {
-            foreach(Room room in allRooms )
+            foreach( Room room in allRooms )
             {
                 if( room.isAccessibleFromMainRoom )
                 {
@@ -146,16 +146,16 @@ public class MapGenerator : MonoBehaviour
             if( !forceAccessibilityFromMainRoom )
             {
                 possibleConnectionFound = false;
-                if(roomA.conectedRooms.Count > 0 )
+                if( roomA.conectedRooms.Count > 0 )
                 {
                     continue;
                 }
             }
             foreach( Room roomB in roomListB )
             {
-                if( roomA == roomB || roomA.isConnected(roomB) )
+                if( roomA == roomB || roomA.isConnected( roomB ) )
                 { continue; }
-                
+
                 for( int tileIndexA = 0; tileIndexA < roomA.edgeTiles.Count; tileIndexA++ )
                 {
                     for( int tileIndexB = 0; tileIndexB < roomB.edgeTiles.Count; tileIndexB++ )
@@ -165,7 +165,7 @@ public class MapGenerator : MonoBehaviour
                         int distanceBetweenRooms =
                             (int)(Mathf.Pow( tileA.tileX - tileB.tileX, 2 ) + Mathf.Pow( tileA.tileY - tileB.tileY, 2 ));
 
-                        if(distanceBetweenRooms < bestDistance || !possibleConnectionFound )
+                        if( distanceBetweenRooms < bestDistance || !possibleConnectionFound )
                         {
                             bestDistance = distanceBetweenRooms;
                             possibleConnectionFound = true;
@@ -198,13 +198,93 @@ public class MapGenerator : MonoBehaviour
 
 
 
-    void CreatePassge(Room roomA, Room roomB, Coord tileA, Coord tileB )
+    void CreatePassge( Room roomA, Room roomB, Coord tileA, Coord tileB )
     {
         Room.ConnectRooms( roomA, roomB );
-        Debug.DrawLine( CoordToWorldPoint( tileA ), CoordToWorldPoint( tileB ), Color.green, 100 );
+        Debug.DrawLine( CoordToWorldPoint( tileA ), CoordToWorldPoint( tileB ), Color.green, 5 );
+
+        List<Coord> line = GetLine( tileA, tileB );
+        foreach( Coord c in line )
+        {
+            DrawCircle( c, 1 );// Здесь изменяется размер соеденяющих коридоров.
+        }
     }
 
-    Vector3 CoordToWorldPoint(Coord tile)
+    void DrawCircle( Coord c, int r )
+    {
+        for( int x = -r; x <= r; x++ )
+        {
+            for( int y = -r; y <= r; y++ )
+            {
+                if( x * x + y * y <= r * r )
+                {
+                    int drawX = c.tileX + x;
+                    int drawY = c.tileY + y;
+                    if( IsInMapRange( drawX, drawY ) )
+                    {
+                        map[drawX, drawY] = 0;
+                    }
+                }
+            }
+        }
+    }
+
+    List<Coord> GetLine( Coord from, Coord to )
+    {
+        List<Coord> line = new List<Coord>();
+
+        int x = from.tileX;
+        int y = from.tileY;
+
+        int dx = to.tileX - from.tileX;
+        int dy = to.tileY - from.tileY;
+
+        bool inverted = false;
+        int step = Math.Sign( dx );
+        int gradientStep = Math.Sign( dy );
+
+        int longest = Mathf.Abs( dx );
+        int shortest = Mathf.Abs( dy );
+
+        if( longest < shortest )
+        {
+            inverted = true;
+            longest = Mathf.Abs( dy );
+            longest = Mathf.Abs( dx );
+
+            step = Math.Sign( dy );
+            gradientStep = Math.Sign( dx );
+        }
+
+        int gradientAccumulation = longest / 2;
+
+        for( int i = 0; i < longest; i++ )
+        {
+            line.Add( new Coord( x, y ) );
+            if( inverted )
+            {
+                y += step;
+            } else
+            {
+                x += step;
+            }
+            gradientAccumulation += shortest;
+            if( gradientAccumulation >= longest )
+            {
+                if( inverted )
+                {
+                    x += gradientStep;
+                } else
+                {
+                    y += gradientStep;
+                }
+                gradientAccumulation -= longest;
+            }
+        }
+        return line;
+    }
+
+    Vector3 CoordToWorldPoint( Coord tile )
     {
         return new Vector3( -width / 2 + .5f + tile.tileX, 2, -height / 2 + .5f + tile.tileY );
     }
@@ -385,7 +465,7 @@ public class MapGenerator : MonoBehaviour
             if( !isAccessibleFromMainRoom )
             {
                 isAccessibleFromMainRoom = true;
-                foreach(Room connectedRoom in conectedRooms)
+                foreach( Room connectedRoom in conectedRooms )
                 {
                     connectedRoom.setAccessibleFromMainRoom();
                 }
@@ -397,7 +477,7 @@ public class MapGenerator : MonoBehaviour
             if( roomA.isAccessibleFromMainRoom )
             {
                 roomB.setAccessibleFromMainRoom();
-            }else if( roomB.isAccessibleFromMainRoom )
+            } else if( roomB.isAccessibleFromMainRoom )
             {
                 roomA.setAccessibleFromMainRoom();
             }
