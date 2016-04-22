@@ -5,6 +5,8 @@ using System.Collections.Generic;
 public class MeshGenerator : MonoBehaviour
 {
 
+    public int tiling = 1;  // колличество повторений текстуры
+
     public SquareGrid squareGrid;
     public MeshFilter walls;
     public MeshFilter cave;
@@ -47,7 +49,7 @@ public class MeshGenerator : MonoBehaviour
         mesh.triangles = triangles.ToArray();
         mesh.RecalculateNormals();
 
-        int tileAmount = 3;  // колличество повторений текстуры
+        int tileAmount = tiling;  // колличество повторений текстуры
         Vector2[] uvs = new Vector2[vertices.Count];
         for( int i = 0; i < vertices.Count; i++ )
         {
@@ -296,7 +298,7 @@ public class MeshGenerator : MonoBehaviour
             if( points[i].vertexIndex == -1 )
             {
                 points[i].vertexIndex = vertices.Count;
-                vertices.Add( points[i].position ); //points[i] - ошибка
+                vertices.Add( points[i].position ); 
             }
         }
     }
