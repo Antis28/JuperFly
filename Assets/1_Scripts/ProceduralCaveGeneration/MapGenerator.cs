@@ -7,6 +7,9 @@ public class MapGenerator : MonoBehaviour
 {
     public int width;
     public int height;
+    public int borderSizeOnMap = 1;
+    public int WallThresholdSize = 50;
+    public int RoomThresholdSize = 50;
 
     public string seed;
     public bool useRandomSeed;
@@ -43,7 +46,7 @@ public class MapGenerator : MonoBehaviour
         ProcessMap();
 
         // Для изменения отступа от края карты
-        int borderSize = 1;
+        int borderSize = borderSizeOnMap;
         int[,] borderedMap = new int[width + borderSize * 2, height + borderSize * 2];
 
         for( int x = 0; x < borderedMap.GetLength( 0 ); x++ )
@@ -59,10 +62,7 @@ public class MapGenerator : MonoBehaviour
                 }
             }
         }
-        /*
-        MeshGenerator meshGen = GetComponent<MeshGenerator>();
-        meshGen.GenerateMesh( map, 1 );
-        */
+        
         MeshGenerator meshGen = GetComponent<MeshGenerator>();
         meshGen.GenerateMesh( borderedMap, 1 );
     }
@@ -70,7 +70,7 @@ public class MapGenerator : MonoBehaviour
     void ProcessMap()
     {
         List<List<Coord>> wallRegions = GetRegions( 1 );
-        int wallThresholdSize = 50; //порог размера  стены
+        int wallThresholdSize = WallThresholdSize; //порог размера  стены 50
 
         foreach( List<Coord> wallRegion in wallRegions )
         {
@@ -85,7 +85,7 @@ public class MapGenerator : MonoBehaviour
         }
 
         List<List<Coord>> roomRegions = GetRegions( 0 );
-        int roomThresholdSize = 50; //порог размера комнаты
+        int roomThresholdSize = RoomThresholdSize; //порог размера комнаты
 
         List<Room> survivingRooms = new List<Room>();
 
