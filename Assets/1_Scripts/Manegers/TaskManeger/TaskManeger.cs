@@ -56,7 +56,7 @@ public class TaskManeger : MonoBehaviour
 
     private void amountOfBonusesAddTwo()
     {
-        poolr.bonusControler.amountOfBonuses += 2;
+        //poolr.bonusControler.amountOfBonuses += 2;
         PoolReference.items_D["WingsItems"].AddItem(2);
     }
 

@@ -5,7 +5,7 @@ using System;
 
 public class BonusControler : MonoBehaviour {
 
-    public int amountOfBonuses;    
+    //public int amountOfBonuses;    
 
     private const int NUMBER_ITEMS = 3;
 
