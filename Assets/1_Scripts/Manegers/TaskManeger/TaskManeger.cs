@@ -42,6 +42,7 @@ public class TaskManeger : MonoBehaviour
         {
             TaskGenerator tg = new TaskGenerator();
             tg.GenerationXML();
+            tg.BattleTaskGenerationXML();
         }
         ReadXML();
         loadNumTask = poolr.loadStats.numTask;
