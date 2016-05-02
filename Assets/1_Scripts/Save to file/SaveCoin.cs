@@ -24,7 +24,7 @@ namespace SaveCoin{
 
   		}
    
-		static public void SaveFromFile(Text text)
+		static public void SaveInFile(Text text)
 		{
 			string filename = "";
 			filename = CheckSave(filename);
