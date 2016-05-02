@@ -27,9 +27,9 @@ public class MapGenerator : MonoBehaviour
 
     void Update()
     {
-        if( Input.GetMouseButtonDown( 0 ) )
+       // if( Input.GetMouseButtonDown( 0 ) )
         {
-            GenerateMap();
+           // GenerateMap();
         }
     }
 
