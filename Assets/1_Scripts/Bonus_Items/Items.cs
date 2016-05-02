@@ -246,5 +246,7 @@ public class WingsItems : Items
     {
         Amount = PoolReference.TableScene["DeathLine"].GetComponent<LoadStats>()._amountOfWings;        
     }
+
+    
     #endregion
 }
