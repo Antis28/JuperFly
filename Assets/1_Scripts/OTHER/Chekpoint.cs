@@ -21,7 +21,7 @@ public class Chekpoint : MonoBehaviour {
 //			Debug.Log("Save Position");
 			RT = other.gameObject.GetComponentInChildren<RectTransform>();
 			SaveStats savePosition = new SaveStats();
-			savePosition.SaveStatistik(RT.position,"Position");
+			savePosition.SaveStatistik(RT.position);
 			if(gameObject.GetComponent<SpawnManeger>())
 			gameObject.GetComponent<SpawnManeger>().enabled = true;
 			if(gameObject.GetComponent<SpawnManeger1>())
