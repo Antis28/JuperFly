@@ -41,9 +41,11 @@ public class SaveStats {
 		/////////////////////////////////////////////////////////////
 		xmlDoc.Save ("Data/Save/Stats.xml");		
 	}
-	public void SaveStatistik(Vector3 vec3, string name)
+	public void SaveStatistik(Vector3 vec3)
 	{
-		CheckFile ();
+        string name = "Position";
+
+        CheckFile ();
 		// Создаем корневой элемент
 		XmlDocument xmlDoc = new XmlDocument ();
 		if(File.Exists(filePatch))
@@ -82,17 +84,9 @@ public class SaveStats {
 		}
 		else
 		{
-			findNode.Attributes["x"].Value = vec3.x.ToString ();
-			//XmlNode pos = findNode;
-			//string ns = pos.GetNamespaceOfPrefix("x");
-			//XmlNode attr = xmlDoc.CreateNode(XmlNodeType.Attribute, "x", ns);
-			//attr.Value = vec3.x.ToString ();
-			//pos.Attributes.SetNamedItem(attr);
+			findNode.Attributes["x"].Value = vec3.x.ToString ();			
 
-			findNode.Attributes["y"].Value = vec3.y.ToString ();
-			//attr = xmlDoc.CreateNode(XmlNodeType.Attribute, "y", ns);
-			//attr.Value = vec3.y.ToString ();
-			//pos.Attributes.SetNamedItem(attr);
+			findNode.Attributes["y"].Value = vec3.y.ToString ();			
 		}
 
 
