@@ -8,11 +8,6 @@ public class DeathTrigger : MonoBehaviour
     public GameObject hero;   
     bool isSave = true;
 
-    void Start()
-    {
-        
-    }    
-
     void OnTriggerEnter2D( Collider2D other )
     {
 
