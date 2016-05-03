@@ -1,7 +1,9 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 using System.Text.RegularExpressions;
-
+/*
+    Повесить на кнопку наборной панели(DialPanel)
+*/
 public class DialButton : MonoBehaviour {
 
     public void ButtonClick()
