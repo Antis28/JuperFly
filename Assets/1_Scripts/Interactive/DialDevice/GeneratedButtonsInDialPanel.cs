@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.Events;
 using System.Collections;
 using System;
 using System.Collections.Generic;
@@ -11,6 +12,7 @@ public class GeneratedButtonsInDialPanel : MonoBehaviour
 
     List<Vector2> sizeButtons;
     List<Vector3> coordButtons;
+    List<Vector3> rotationButtons;
 
 
     public Image[] graphicPressed;
@@ -31,41 +33,49 @@ public class GeneratedButtonsInDialPanel : MonoBehaviour
             } catch { }
         }
 
-
-        Generate( new RectTransform(), 36 );
+        Generate( new RectTransform(), 0 );
+        Generate( new RectTransform(), 1 );
+        
     }
 
     private void Generate( RectTransform coord, int count )
     {
         var button = Instantiate( prefabDialButton );
-        button.name = "button_" + (count+1);
+        button.name = "button_" + (count + 1);
         button.transform.parent = transform;
 
         // Картинка
         button.GetComponent<Image>().sprite = graphicTarget[count].sprite;
-        button.GetComponent<Button>().targetGraphic = graphicTarget[count];
+
 
         var spr = new SpriteState();
         spr.pressedSprite = graphicPressed[count].sprite;
+        spr.highlightedSprite = graphicPressed[count].sprite;
         button.GetComponent<Button>().spriteState = spr;
 
         // положение на экране
-        button.GetComponent<RectTransform>().localScale = new Vector3( 1f, 1f, 1f );
+        button.GetComponent<RectTransform>().localScale = new Vector3(1f,1f,1f);
+        button.GetComponent<RectTransform>().Rotate( rotationButtons[count] );
 
-        button.transform.localPosition = coordButtons[0];
-        button.GetComponent<RectTransform>().sizeDelta = sizeButtons[0];
-
-
+        button.transform.localPosition = coordButtons[count];
+        button.GetComponent<RectTransform>().sizeDelta = sizeButtons[count];
     }
 
     void FullCoorButtonsList()
     {
         sizeButtons = new List<Vector2>();
         coordButtons = new List<Vector3>();
+        rotationButtons = new List<Vector3>();
 
         //button 1
-        coordButtons.Add( new Vector3( -11.9f, 151.7f ) );
-        sizeButtons.Add( new Vector2( 58.1f, 50.3f ) );
+        coordButtons.Add( new Vector3( -13.9f, 154.6f ) );
+        sizeButtons.Add( new Vector2( 51.15f, 49.42f ) );
+        rotationButtons.Add( new Vector3( 0f, 0f, 0f ) );
+
+        //button 2
+        coordButtons.Add( new Vector3( 38.3f, 146.7f ) );
+        sizeButtons.Add( new Vector2( 50.2f, 49.5f ) );
+        rotationButtons.Add( new Vector3( 0f, 0f, 352.23f ) );//z 352.23f
 
     }
 }
