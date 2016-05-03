@@ -7,7 +7,7 @@ public class MusicManeger : MonoBehaviour {
 	// Use this for initialization
 	void Awake () {
 
-        var musicPrefab = Resources.Load("Music") as GameObject; // Загружаю музыку из Assets\Resources\Music.prefab
+        var musicPrefab = Resources.Load( "MainMusicInScene" ) as GameObject; // Загружаю музыку из Assets\Resources\Music.prefab
         Music = GameObject.FindGameObjectWithTag ("Music");
 		if(Music == null)
 		{
@@ -15,7 +15,7 @@ public class MusicManeger : MonoBehaviour {
             //Music.transform.parent = gameObject.transform; //начинает музыку сначала
 
             Music = (GameObject)Instantiate(musicPrefab, new Vector3(0, 0, 0), Quaternion.identity);
-            Music.transform.parent = gameObject.transform; //начинает музыку сначала
+            Music.transform.parent = gameObject.transform; //присоеденил к объекту в сцене
 
             DontDestroyOnLoad(this);            
 			AudioSource AS = Music.GetComponent<AudioSource> ();
