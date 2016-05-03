@@ -8,15 +8,18 @@ using DDC = DialDeviceCore.ShevronCode; // ядро для управленя п
 
 public class DialManeger : MonoBehaviour
 {
+    public GameObject starGate;
+
 
     public List<Button> activeButtons = new List<Button>();
-     
 
+    [HideInInspector]
+    public int  shevronCounter = 0;
+    [HideInInspector]
+    public string currentShevronCode ="";
     
     int lengthShevron = 7;
-    public int  shevronCounter = 0;
-    public string currentShevronCode ="";
-    public GameObject starGate;
+
 
     public AudioClip[] audioClips;
     AudioSource audioSource;
