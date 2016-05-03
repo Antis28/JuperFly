@@ -6,8 +6,9 @@ public class AddToPoolCanvas : MonoBehaviour
 {
 
     //PoolReference pool;   
+    public Canvas   GameCanvas;
     public Canvas   TaskCanvas;
-    public Canvas   SkilsCanvas;
+    public Canvas   SkillsCanvas;
     public Canvas   FightCanvas;
 
     // Use this for initialization
@@ -25,14 +26,19 @@ public class AddToPoolCanvas : MonoBehaviour
             }
             try
             {
+                PoolReference.TableScene.Add( GameCanvas.name, GameCanvas.gameObject );
+                //print( TaskCanvas.name );
+            } catch( ArgumentException ) { print( "Такой ключ уже существует: " + TaskCanvas.name ); }
+            try
+            {
                 PoolReference.TableScene.Add( TaskCanvas.name, TaskCanvas.gameObject );
                 //print( TaskCanvas.name );
             } catch( ArgumentException ) { print( "Такой ключ уже существует: " + TaskCanvas.name ); }
             try
             {
-                PoolReference.TableScene.Add( SkilsCanvas.name, SkilsCanvas.gameObject );
+                PoolReference.TableScene.Add( SkillsCanvas.name, SkillsCanvas.gameObject );
                 //print( SkilsCanvas.name );
-            } catch( ArgumentException ) { print( "Такой ключ уже существует: " + SkilsCanvas.name ); }
+            } catch( ArgumentException ) { print( "Такой ключ уже существует: " + SkillsCanvas.name ); }
             try
             {
                 PoolReference.TableScene.Add( FightCanvas.name, FightCanvas.gameObject );
