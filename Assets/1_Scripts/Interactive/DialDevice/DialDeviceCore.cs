@@ -4,6 +4,7 @@ using System;
 
 public class DialDeviceCore : MonoBehaviour
 {
+    
 
     public abstract class ShevronCode
     {
@@ -38,6 +39,9 @@ public class DialDeviceCore : MonoBehaviour
         public override  void SetLocation()
         {
             //Настройка портала на локацию с названием %метод%
+            var mg = PoolReference.TableScene["Map Generator"].GetComponent<MapGenerator>();
+            mg.seed = CAVE_1_SEED_73;
+            mg.GenerateMap();
         }
     }
     class Cave_02_seed_25 : ShevronCode

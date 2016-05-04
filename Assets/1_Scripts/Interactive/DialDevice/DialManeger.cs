@@ -10,7 +10,7 @@ using DDC = DialDeviceCore.ShevronCode; // ядро для управленя п
 
 public class DialManeger : MonoBehaviour
 {
-    public GameObject starGate;
+    public GameObject starGateVortex;
     public AudioClip[] audioClips;
     public List<Button> activeButtons = new List<Button>(); // Используется что бы разблокировать кнопки.
 
@@ -33,15 +33,37 @@ public class DialManeger : MonoBehaviour
         var lockShevron = DDC.Create( currentShevronCode );
         if( lockShevron != null )
         {
-            audioSource.PlayOneShot( audioClips[0] );
-            StartCoroutine( "PauseUpdatePanel" );
             lockShevron.SetLocation();
+            
+            StartCoroutine( "EgengeVortex" );
+            StartCoroutine( "PauseUpdatePanel" );
+            
+            
         } else
         {
             audioSource.PlayOneShot( audioClips[1] );
             updatePanel();
         }
+    }
 
+    IEnumerator EgengeVortex()
+    {
+        audioSource.PlayOneShot( audioClips[0] );
+        yield return new WaitForSeconds( 3.3f);
+        audioSource.PlayOneShot( audioClips[4] );
+        var animator = starGateVortex.GetComponent<Animator>();
+        animator.SetBool( "IsCalling", true );
+        animator.SetBool( "IsReset", false );
+        yield return new WaitForSeconds( 2 );
+        animator.SetBool( "IsCalling", false );
+    }
+
+    IEnumerator ResetVortex()
+    {
+        var animator = starGateVortex.GetComponent<Animator>();
+        animator.SetBool( "IsCalling", false );
+        animator.SetBool( "IsReset", true );
+        yield return new WaitForSeconds( 2 );
     }
 
     IEnumerator PauseUpdatePanel()
