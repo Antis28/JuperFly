@@ -27,4 +27,10 @@ public class DialButton : MonoBehaviour {
         }
         
     }
+
+    public void Button_Enter()
+    {
+        var dialManeger = PoolReference.TableScene["DialPanel"].GetComponent<DialManeger>();
+        dialManeger.Button_Enter();
+    }
 }

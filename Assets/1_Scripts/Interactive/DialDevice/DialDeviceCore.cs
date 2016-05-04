@@ -8,7 +8,7 @@ public class DialDeviceCore : MonoBehaviour
     public abstract class ShevronCode
     {
         public const string CAVE_1_SEED_73 = "12337382021",
-                            CAVE_2_SEED_25 = "42337382021",
+                            CAVE_2_SEED_25 = "45617161521",
                             CAVE_3_SEED_73 = "52337382021";
 
 
@@ -27,7 +27,6 @@ public class DialDeviceCore : MonoBehaviour
                     return null;
             }
         }
-
 
         public abstract void SetLocation();
     }
