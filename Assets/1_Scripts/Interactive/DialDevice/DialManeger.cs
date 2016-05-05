@@ -20,12 +20,13 @@ public class DialManeger : MonoBehaviour
     public string currentShevronCode ="";
 
     int lengthShevron = 7;
-    
+    Animator animator;
     AudioSource audioSource;
 
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
+        animator = starGateVortex.GetComponent<Animator>();
     }
 
     public void Button_Enter()
@@ -34,41 +35,50 @@ public class DialManeger : MonoBehaviour
         if( lockShevron != null )
         {
             lockShevron.SetLocation();
-            
-            StartCoroutine( "EgengeVortex" );
-            StartCoroutine( "PauseUpdatePanel" );
-            
-            
+
+            StartCoroutine( EgengeVortex() );
+            StartCoroutine( PauseUpdatePanel() );
+
+
         } else
         {
             audioSource.PlayOneShot( audioClips[1] );
             updatePanel();
+            StartCoroutine( ResetVortex() );
         }
     }
 
     IEnumerator EgengeVortex()
     {
-        var animator = starGateVortex.GetComponent<Animator>();
-
         audioSource.PlayOneShot( audioClips[0] );
-        yield return new WaitForSeconds( 3.3f);        
-        
-        animator.SetBool( "IsCalling", true );
-        animator.SetBool( "IsReset", false );
-        yield return new WaitForSeconds( 2 );
 
+        yield return new WaitForSeconds( 3.5f );
+        animator.Play( "Launching" );       
+         
+        yield return new WaitForSeconds( 4.336f);
+        audioSource.Stop();
         audioSource.PlayOneShot( audioClips[3] );
-        animator.SetBool( "IsCalling", false );
-        yield return new WaitForSeconds( 10 );
-        audioSource.PlayOneShot( audioClips[4] );
+        
+        yield return new WaitForSeconds( 9 );
+        CloseVortex();
     }
 
     IEnumerator ResetVortex()
     {
-        var animator = starGateVortex.GetComponent<Animator>();
-        animator.SetBool( "IsCalling", false );
-        animator.SetBool( "IsReset", true );
+        bool isIddle = animator.GetCurrentAnimatorStateInfo( 0 ).IsName( "Idlle_close" );
+        if( !isIddle )
+        {
+            CloseVortex();
+        }
+        
         yield return new WaitForSeconds( 2 );
+    }
+
+    void CloseVortex()
+    {
+        animator.Play( "Close" );
+        audioSource.Stop();
+        audioSource.PlayOneShot( audioClips[4] );
     }
 
     IEnumerator PauseUpdatePanel()
@@ -80,7 +90,6 @@ public class DialManeger : MonoBehaviour
     void updatePanel()
     {
         print( currentShevronCode );
-
         shevronCounter = 0;
         currentShevronCode = "";
         for( int i = 0; i < activeButtons.Count; i++ )
