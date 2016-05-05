@@ -14,14 +14,15 @@ public class Shop : MonoBehaviour
 
     void Start()
     {
-        if( simplePC == null )
-            simplePC = PoolReference.TableScene[EnumInPool.hero.ToString()].GetComponent<SimplePlatformContoroler>();
-        GameCanvas = PoolReference.TableScene[EnumInPool.GameCanvas.ToString()].GetComponent<Canvas>();
-        TaskCanvas = PoolReference.TableScene[EnumInPool.TaskCanvas.ToString()].GetComponent<Canvas>();
+        try
+        {
+            if( simplePC == null )
+                simplePC = PoolReference.TableScene[EnumInPool.hero.ToString()].GetComponent<SimplePlatformContoroler>();
+            GameCanvas = PoolReference.TableScene[EnumInPool.GameCanvas.ToString()].GetComponent<Canvas>();
+            TaskCanvas = PoolReference.TableScene[EnumInPool.TaskCanvas.ToString()].GetComponent<Canvas>();
+        } catch { }
         shopTextGO = shopText.gameObject;
         shopTextGO.SetActive( false );
-
-
     }
 
 
