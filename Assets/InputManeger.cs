@@ -11,7 +11,7 @@ public class InputManeger : MonoBehaviour {
     public GameObject hero;
     PoolR poolr;
 
-    bool isSave = true;
+    
 
     // Use this for initialization
     void Start () {
@@ -66,8 +66,7 @@ public class InputManeger : MonoBehaviour {
         if( tm.numTask > 1 )
             ss.SaveStatistik( tm.numTask.ToString(), "NumberTask" );
 
-        Debug.Log( "Save Complite" );
-        isSave = false;
+        Debug.Log( "Save Complite" );        
         } catch { }
         PoolReference.TableScene.Clear(); //Очистка ключей
     }
