@@ -4,14 +4,13 @@ using System.Collections;
 public class Player : MonoBehaviour
 {
 
-    Rigidbody rigidbody;
+    Rigidbody playerRigidbody;
     Vector3 velosity;
 
     // Use this for initialization
     void Start()
     {
-        rigidbody = GetComponent<Rigidbody>();
-
+        playerRigidbody = GetComponent<Rigidbody>();        
     }
 
     // Update is called once per frame
@@ -21,6 +20,6 @@ public class Player : MonoBehaviour
     }
     void FixedUpdate()
     {
-        rigidbody.MovePosition( rigidbody.position + velosity * Time.fixedDeltaTime );
+        playerRigidbody.MovePosition( playerRigidbody.position + velosity * Time.fixedDeltaTime );
     }
 }
