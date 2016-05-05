@@ -4,7 +4,11 @@ using System;
 
 public class DialDeviceCore : MonoBehaviour
 {
-    
+     GameObject starGate;
+    void Start()
+    {
+        starGate = GetComponent<DialManeger>().starGateVortex.GetComponentInParent<GameObject>();       
+    }
 
     public abstract class ShevronCode
     {
