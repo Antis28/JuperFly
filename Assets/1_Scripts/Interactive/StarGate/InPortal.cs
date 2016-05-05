@@ -11,8 +11,6 @@ public class InPortal : MonoBehaviour {
 
     void Start()
     {
-        
-        
     }
 
     void OnTriggerStay2D( Collider2D other )

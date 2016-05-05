@@ -6,31 +6,31 @@ using System.Text.RegularExpressions;
 */
 public class DialButton : MonoBehaviour {
 
+    DialManeger dialManeger;
+
+    void Start()
+    {
+        dialManeger = PoolReference.TableScene["DialManeger"].GetComponent<DialManeger>();
+    }
+
     public void ButtonClick()
     {
         var button = GetComponent<Button>();
-        var dialManeger = PoolReference.TableScene["DialPanel"].GetComponent<DialManeger>();
-        
-        string matchValue =  Regex.Match( button.name, @"\d+" ).Value;
+        //var dialManeger = PoolReference.TableScene["DialManeger"].GetComponent<DialManeger>();
+
+        string currentShevronCode =  Regex.Match( button.name, @"\d+" ).Value;
         
         if( dialManeger.IsComleteCode() )
         {
-            dialManeger.currentShevronCode += matchValue;
-            dialManeger.shevronCounter++;
-            dialManeger.CallCancel();
-            dialManeger.activeButtons.Add( button );
-
-            button.interactable = false;                                  
-            
-            
-            print( dialManeger.shevronCounter );
+            dialManeger.TouchButton( currentShevronCode, button );
+                         
         }
         
     }
 
     public void Button_Enter()
     {
-        var dialManeger = PoolReference.TableScene["DialPanel"].GetComponent<DialManeger>();
+        //var dialManeger = PoolReference.TableScene["DialManeger"].GetComponent<DialManeger>();
         dialManeger.Button_Enter();
     }
 }

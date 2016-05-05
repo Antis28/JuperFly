@@ -45,8 +45,7 @@ public class GeneratedButtonsInDialPanel : MonoBehaviour
     }
 
     private void Generate(int count )
-    {
-        var coord = new RectTransform();
+    {        
         var button = Instantiate( prefabDialButton );
         button.name = "button_" + (count + 1);
         button.transform.SetParent( transform );
@@ -70,7 +69,7 @@ public class GeneratedButtonsInDialPanel : MonoBehaviour
             button.GetComponent<RectTransform>().Rotate( rotationButtons[count] );
             button.transform.localPosition = coordButtons[count];
             button.GetComponent<RectTransform>().sizeDelta = sizeButtons[count];
-        } catch(Exception err) { print( "Положение на экране не задано" ); }
+        } catch { print( "Положение на экране не задано" ); }
     }
 
     void FullCoordButtonsList()

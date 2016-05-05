@@ -2,11 +2,21 @@
 using System.Collections;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System;
 
 public class DeathTrigger : MonoBehaviour
-{   
-    public GameObject hero;   
+{
+    public GameObject hero;
     bool isSave = true;
+    public InputManeger IM;
+
+    void Start()
+    {
+        try
+        {
+           // IM = PoolReference.TableScene[EnumInPool.InputManeger.ToString()].GetComponent<InputManeger>();
+        } catch { print( "!!!!!!!!!! + PoolReference.TableScene[EnumInPool.InputManeger.ToString()].GetComponent<InputManeger>()" ); }
+    }
 
     void OnTriggerEnter2D( Collider2D other )
     {
@@ -15,8 +25,10 @@ public class DeathTrigger : MonoBehaviour
         {
             if( isSave )
             {
-                PoolReference.TableScene[EnumInPool.InputManeger.ToString()].GetComponent<InputManeger>().SaveStatus();                
-                Application.LoadLevel( Application.loadedLevel );
+
+                IM.SaveStatus();
+                SceneManager.LoadScene( SceneManager.GetActiveScene().name );
+                
             }
         }
         if( other.gameObject.CompareTag( "Ground" ) )
@@ -25,5 +37,5 @@ public class DeathTrigger : MonoBehaviour
         }
 
     }
-   
+
 }

@@ -12,6 +12,7 @@ public enum EnumInPool
     CoinText,
     BonusFlyText,
     GameCanvas,
-    hero
+    hero,
+        DialCanvas
 
 }

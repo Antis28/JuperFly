@@ -51,7 +51,8 @@ public class InputManeger : MonoBehaviour {
         if( Input.GetKeyDown( KeyCode.F10 ) )
         {
             var dc = PoolReference.TableScene[EnumInPool.DialCanvas.ToString()];
-            dc.SetActive( !dc.activeSelf );           
+            dc.SetActive( !dc.activeSelf );
+                      
         }
 
     }

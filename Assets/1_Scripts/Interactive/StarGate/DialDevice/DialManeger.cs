@@ -3,8 +3,7 @@ using System.Collections;
 using UnityEngine.UI;
 using System.Collections.Generic;
 using System;
-using DDC = DialDeviceCore.ShevronCode; // ядро для управленя порталом. При совпадении строки с типом
-                                        //направляет в разные локации.
+                                         
 
 [RequireComponent( typeof( AudioSource ) )]
 
@@ -20,21 +19,31 @@ public class DialManeger : MonoBehaviour
     public string currentShevronCode ="";
 
     int lengthShevron = 7;
-    Animator animator;
+    
+    public Animator animatorMainGate;
+    public Animator animatorOtherGate;
     AudioSource audioSource;
+
+    DialDeviceCore DDC;// ядро для управленя порталом. При совпадении строки с типом
+                       //направляет в разные локации.
+
 
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
-        animator = starGateVortex.GetComponent<Animator>();
+        //animator = starGateVortex.GetComponent<Animator>();        
+        DDC = PoolReference.TableScene["DialManeger"].GetComponent<DialDeviceCore>();
+
+        
     }
 
     public void Button_Enter()
     {
-        var lockShevron = DDC.Create( currentShevronCode );
+        
+        var lockShevron = DDC.CreateShevronCode( currentShevronCode );
         if( lockShevron != null )
         {
-            lockShevron.SetLocation();
+            lockShevron.CreateWorld();
 
             StartCoroutine( EgengeVortex() );
             StartCoroutine( PauseUpdatePanel() );
@@ -53,30 +62,33 @@ public class DialManeger : MonoBehaviour
         audioSource.PlayOneShot( audioClips[0] );
 
         yield return new WaitForSeconds( 3.5f );
-        animator.Play( "Launching" );       
-         
-        yield return new WaitForSeconds( 4.336f);
+        animatorMainGate.Play( "Launching" );
+        animatorOtherGate.Play( "Launching" );
+
+        yield return new WaitForSeconds( 4.336f );
         audioSource.Stop();
         audioSource.PlayOneShot( audioClips[3] );
-        
+
         yield return new WaitForSeconds( 9 );
         CloseVortex();
+        ResetGateSetting();
     }
 
     IEnumerator ResetVortex()
     {
-        bool isIddle = animator.GetCurrentAnimatorStateInfo( 0 ).IsName( "Idlle_close" );
+        bool isIddle = animatorMainGate.GetCurrentAnimatorStateInfo( 0 ).IsName( "Idlle_close" );
         if( !isIddle )
         {
             CloseVortex();
         }
-        
+
         yield return new WaitForSeconds( 2 );
-    }
+    }    
 
     void CloseVortex()
     {
-        animator.Play( "Close" );
+        animatorMainGate.Play( "Close" );
+        animatorOtherGate.Play( "Close" );
         audioSource.Stop();
         audioSource.PlayOneShot( audioClips[4] );
     }
@@ -86,9 +98,14 @@ public class DialManeger : MonoBehaviour
         yield return new WaitForSeconds( 4 );
         updatePanel();
     }
+    void ResetGateSetting()
+    {
+        animatorMainGate.GetComponent<InPortal>().exitPortal = null;
+        animatorOtherGate.GetComponent<InPortal>().exitPortal = null;
+    }
 
     void updatePanel()
-    {
+    {        
         print( currentShevronCode );
         shevronCounter = 0;
         currentShevronCode = "";
@@ -101,9 +118,15 @@ public class DialManeger : MonoBehaviour
         activeButtons.Clear();
     }
 
-    public void CallCancel()
+    public void TouchButton( string code, Button btn )
     {
+        currentShevronCode += code;
         audioSource.PlayOneShot( audioClips[2] );
+        shevronCounter++;
+        btn.interactable = false;
+        activeButtons.Add( btn );
+        
+        print( "Набрано символов: " + shevronCounter +"\nКод сивола: " + code );
     }
 
     public bool IsComleteCode()
