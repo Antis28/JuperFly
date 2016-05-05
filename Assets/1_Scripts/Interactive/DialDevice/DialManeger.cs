@@ -48,14 +48,19 @@ public class DialManeger : MonoBehaviour
 
     IEnumerator EgengeVortex()
     {
-        audioSource.PlayOneShot( audioClips[0] );
-        yield return new WaitForSeconds( 3.3f);
-        audioSource.PlayOneShot( audioClips[4] );
         var animator = starGateVortex.GetComponent<Animator>();
+
+        audioSource.PlayOneShot( audioClips[0] );
+        yield return new WaitForSeconds( 3.3f);        
+        
         animator.SetBool( "IsCalling", true );
         animator.SetBool( "IsReset", false );
         yield return new WaitForSeconds( 2 );
+
+        audioSource.PlayOneShot( audioClips[3] );
         animator.SetBool( "IsCalling", false );
+        yield return new WaitForSeconds( 10 );
+        audioSource.PlayOneShot( audioClips[4] );
     }
 
     IEnumerator ResetVortex()
