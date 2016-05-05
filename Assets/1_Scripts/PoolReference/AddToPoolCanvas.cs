@@ -28,7 +28,9 @@ public class AddToPoolCanvas : MonoBehaviour
             {
                 PoolReference.TableScene.Add( GameCanvas.name, GameCanvas.gameObject );
                 //print( TaskCanvas.name );
-            } catch( ArgumentException ) { print( "Такой ключ уже существует: " + TaskCanvas.name ); }
+            } catch( ArgumentException ) { print( "Такой ключ уже существует: " + TaskCanvas.name ); } 
+            catch( Exception ) { print( "Проверь у скриптов наличие ссылок на объекты" ); }
+
             try
             {
                 PoolReference.TableScene.Add( TaskCanvas.name, TaskCanvas.gameObject );
