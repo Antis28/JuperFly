@@ -49,7 +49,7 @@ public class GeneratedButtonsInDialPanel : MonoBehaviour
         var coord = new RectTransform();
         var button = Instantiate( prefabDialButton );
         button.name = "button_" + (count + 1);
-        button.transform.parent = transform;
+        button.transform.SetParent( transform );
 
         // Картинка
         //button.GetComponent<Image>().sprite = graphicTarget[count].sprite;
