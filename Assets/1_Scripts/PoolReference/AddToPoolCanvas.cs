@@ -10,6 +10,7 @@ public class AddToPoolCanvas : MonoBehaviour
     public Canvas   TaskCanvas;
     public Canvas   SkillsCanvas;
     public Canvas   FightCanvas;
+    public Canvas   DialCanvas;
 
     // Use this for initialization
     void Awake()
@@ -46,9 +47,14 @@ public class AddToPoolCanvas : MonoBehaviour
                 PoolReference.TableScene.Add( FightCanvas.name, FightCanvas.gameObject );
                // print( FightCanvas.name );
             } catch( ArgumentException ) { print( "Такой ключ уже существует: " + FightCanvas.name ); }
+            try
+            {
+                PoolReference.TableScene.Add( DialCanvas.name, DialCanvas.gameObject );
+                // print( FightCanvas.name );
+            } catch( ArgumentException ) { print( "Такой ключ уже существует: " + DialCanvas.name ); }
 
 
-        } catch( NullReferenceException )
+    } catch( NullReferenceException )
         {
             print( "Нет ссылки на объект " );
         }
