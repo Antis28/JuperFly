@@ -15,7 +15,7 @@ public class InputManeger : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        PoolReference.TableScene.Add( this.name, this.gameObject );        
+        //PoolReference.TableScene.Add( this.name, this.gameObject );        
     }
 
     // Update is called once per frame
@@ -27,7 +27,8 @@ public class InputManeger : MonoBehaviour {
             {
                 SaveStatus();
                 //Application.LoadLevel (Application.loadedLevel);
-                SceneManager.LoadScene( "MiniGame_2" );
+               // SceneManager.LoadScene( "MiniGame_2" );
+                SceneManager.LoadScene( SceneManager.GetActiveScene().name );
             }
         }
         if( Input.GetKeyDown( KeyCode.Escape ) )
@@ -52,10 +53,12 @@ public class InputManeger : MonoBehaviour {
 
     public void SaveStatus()
     {
-        coinText = PoolReference.TableScene[EnumInPool.CoinText.ToString()].GetComponent<Text>();
-        flyText  = PoolReference.TableScene[EnumInPool.BonusFlyText.ToString()].GetComponent<Text>();
-        tm       = PoolReference.TableScene[EnumInPool.TaskCanvas.ToString()].GetComponent<TaskManeger>();
-
+        try
+        {
+            coinText = PoolReference.TableScene[EnumInPool.CoinText.ToString()].GetComponent<Text>();
+            flyText = PoolReference.TableScene[EnumInPool.BonusFlyText.ToString()].GetComponent<Text>();
+            tm = PoolReference.TableScene[EnumInPool.TaskCanvas.ToString()].GetComponent<TaskManeger>();
+        
         SaveStats ss = new SaveStats();
         ss.SaveStatistik( coinText.text, "Coin" );
 
@@ -65,7 +68,7 @@ public class InputManeger : MonoBehaviour {
 
         Debug.Log( "Save Complite" );
         isSave = false;
+        } catch { }
         PoolReference.TableScene.Clear(); //Очистка ключей
-
     }
 }
