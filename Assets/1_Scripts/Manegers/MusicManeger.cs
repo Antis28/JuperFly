@@ -11,11 +11,9 @@ public class MusicManeger : MonoBehaviour {
         Music = GameObject.FindGameObjectWithTag ("Music");
 		if(Music == null)
 		{
-            //Music = (GameObject)Instantiate(musicPrefab, new Vector3(0,0,0), Quaternion.identity);
-            //Music.transform.parent = gameObject.transform; //начинает музыку сначала
-
             Music = (GameObject)Instantiate(musicPrefab, new Vector3(0, 0, 0), Quaternion.identity);
-            Music.transform.parent = gameObject.transform; //присоеденил к объекту в сцене
+            //Music.transform.parent = gameObject.transform; //присоеденил к объекту в сцене
+            Music.transform.SetParent(gameObject.transform); //присоеденил к объекту в сцене
 
             DontDestroyOnLoad(this);            
 			AudioSource AS = Music.GetComponent<AudioSource> ();
