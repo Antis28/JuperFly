@@ -156,8 +156,7 @@ public class WingsItems : Items
     }
     #endregion
 
-    #region Методы
-    //[Obsolete("Временно используется глобальный amountOfBonuses")]
+    #region Методы    
     void Initialization()
     {
         GameObject goTemp;
