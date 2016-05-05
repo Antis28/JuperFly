@@ -48,6 +48,11 @@ public class InputManeger : MonoBehaviour {
             if( !PoolReference.TableScene[EnumInPool.TaskCanvas.ToString()].activeSelf )//|| PoolReference.TableScene[EnumInPool.TaskCanvas.ToString()].GetComponent<Canvas>().enabled
                 PoolReference.TableScene[EnumInPool.SkillManeger.ToString()].GetComponent<SkillManeger>().DoneButton();
         }
+        if( Input.GetKeyDown( KeyCode.F10 ) )
+        {
+            var dc = PoolReference.TableScene[EnumInPool.DialCanvas.ToString()];
+            dc.SetActive( !dc.activeSelf );           
+        }
 
     }
 
