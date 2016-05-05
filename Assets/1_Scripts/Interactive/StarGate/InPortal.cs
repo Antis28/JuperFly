@@ -7,6 +7,14 @@ public class InPortal : MonoBehaviour {
     public Transform exitPortal;
     public GameObject destroyCave;
 
+    
+
+    void Start()
+    {
+        
+        
+    }
+
     void OnTriggerStay2D( Collider2D other )
     {
 
@@ -15,10 +23,12 @@ public class InPortal : MonoBehaviour {
             if( exitPortal != null )
             {
                 other.gameObject.GetComponent<RectTransform>().position = exitPortal.position;
-                Destroy( destroyCave );
+                //Destroy( destroyCave );
                 return;
             }
-            other.gameObject.GetComponent<RectTransform>().position = vec3;
+            //other.gameObject.GetComponent<RectTransform>().position = vec3;
         }
     }
+
+    
 }
