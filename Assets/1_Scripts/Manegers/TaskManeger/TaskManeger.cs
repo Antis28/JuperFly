@@ -35,7 +35,8 @@ public class TaskManeger : MonoBehaviour
         poolr = GameObject.Find("PoolReference").GetComponent<PoolR>();
 
         //poolr.TaskCanvas.gameObject.SetActive(false);
-        PoolReference.TableScene[EnumInPool.TaskCanvas.ToString()].SetActive( false );
+        //PoolReference.TableScene[EnumInPool.TaskCanvas.ToString()].SetActive( false );
+        gameObject.SetActive( false );
         poolr.TaskNumber.enabled = false;
 
         if (!File.Exists(putTaskBase))
