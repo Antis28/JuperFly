@@ -39,16 +39,14 @@ public class DialManeger : MonoBehaviour
 
     public void Button_Enter()
     {
-        
-        var lockShevron = DDC.CreateShevronCode( currentShevronCode );
+
+        DialDeviceCore.ShevronCode lockShevron = DDC.CreateShevronCode( currentShevronCode );
         if( lockShevron != null )
         {
             lockShevron.CreateWorld();
 
             StartCoroutine( EgengeVortex() );
             StartCoroutine( PauseUpdatePanel() );
-
-
         } else
         {
             audioSource.PlayOneShot( audioClips[1] );
@@ -76,21 +74,27 @@ public class DialManeger : MonoBehaviour
 
     IEnumerator ResetVortex()
     {
-        bool isIddle = animatorMainGate.GetCurrentAnimatorStateInfo( 0 ).IsName( "Idlle_close" );
-        if( !isIddle )
+        try
         {
-            CloseVortex();
-        }
+            bool isIddle = animatorMainGate.GetCurrentAnimatorStateInfo( 0 ).IsName( "Idlle_close" );
+            if( !isIddle )
+            {
+                CloseVortex();
+            }
+        } catch { print( "!!!!!!!!! - ResetVortex error"); }
 
         yield return new WaitForSeconds( 2 );
     }    
 
     void CloseVortex()
     {
-        animatorMainGate.Play( "Close" );
-        animatorOtherGate.Play( "Close" );
-        audioSource.Stop();
-        audioSource.PlayOneShot( audioClips[4] );
+        try
+        {
+            animatorMainGate.Play( "Close" );
+            animatorOtherGate.Play( "Close" );
+            audioSource.Stop();
+            audioSource.PlayOneShot( audioClips[4] );
+        } catch { print( "!!!!!!!!! - CloseVortex error" ); }
     }
 
     IEnumerator PauseUpdatePanel()

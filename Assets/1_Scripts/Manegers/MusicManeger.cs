@@ -15,7 +15,7 @@ public class MusicManeger : MonoBehaviour {
             //Music.transform.parent = gameObject.transform; //присоеденил к объекту в сцене
             Music.transform.SetParent(gameObject.transform); //присоеденил к объекту в сцене
 
-            DontDestroyOnLoad(this);            
+            //DontDestroyOnLoad(this);            
 			AudioSource AS = Music.GetComponent<AudioSource> ();
 			AS.Play();
 

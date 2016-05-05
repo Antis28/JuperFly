@@ -25,7 +25,7 @@ public class DialDeviceCore : MonoBehaviour
         SGMain = GameObject.Find( mainGate );
         SGOther = GameObject.Find( otherGate );
         dialManeger = GetComponent<DialManeger>();
-        print( dialManeger );
+        //print( dialManeger );
     }
     public ShevronCode CreateShevronCode( string code )//из строки в объект
     {
@@ -86,6 +86,8 @@ public class DialDeviceCore : MonoBehaviour
             SGMain.GetComponent<InPortal>().exitPortal = SGOther.transform;
             dialManeger.animatorMainGate = SGMain.GetComponent<Animator>();
             dialManeger.animatorOtherGate = SGOther.GetComponent<Animator>();
+            SGOther.transform.parent.transform.localPosition = new Vector3( -191f, -71.4f, 0 );
+            print( SGOther.transform.parent.name );
         }
     }
     class Cave_02_seed_25 : ShevronCode
@@ -99,29 +101,42 @@ public class DialDeviceCore : MonoBehaviour
         void SetLocation()
         {
             //Настройка портала на локацию с названием %метод%
+            var mg = PoolReference.TableScene["Map Generator"].GetComponent<MapGenerator>();
+            mg.seed = CAVE_2_SEED_25;
+            mg.GenerateMap();
+            
         }
 
         void SetUpGate()
         {
-            SetLocation();
-            SetUpGate();
+            SGMain.GetComponent<InPortal>().exitPortal = SGOther.transform;
+            dialManeger.animatorMainGate = SGMain.GetComponent<Animator>();
+            dialManeger.animatorOtherGate = SGOther.GetComponent<Animator>();
+            SGOther.transform.parent.transform.localPosition = new Vector3( -113.9f, 31.1f, 0 );
         }
     }
     class Cave_03_seed_25 : ShevronCode
     {
         public override void CreateWorld()
         {
-            throw new NotImplementedException();
+            SetLocation();
+            SetUpGate();
         }
 
         void SetLocation()
         {
             //Настройка портала на локацию с названием %метод%
+            var mg = PoolReference.TableScene["Map Generator"].GetComponent<MapGenerator>();
+            mg.seed = CAVE_3_SEED_73;
+            mg.GenerateMap();           
         }
 
         void SetUpGate()
         {
-            throw new NotImplementedException();
+            SGMain.GetComponent<InPortal>().exitPortal = SGOther.transform;
+            dialManeger.animatorMainGate = SGMain.GetComponent<Animator>();
+            dialManeger.animatorOtherGate = SGOther.GetComponent<Animator>();
+            SGOther.transform.parent.transform.localPosition = new Vector3( -126.61f, -64.26f, 0 );
         }
     }
 

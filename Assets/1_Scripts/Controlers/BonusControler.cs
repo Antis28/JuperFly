@@ -3,7 +3,8 @@ using UnityEngine.UI;
 using System.Collections;
 using System;
 
-public class BonusControler : MonoBehaviour {
+public class BonusControler : MonoBehaviour
+{
 
     //public int amountOfBonuses;    
 
@@ -15,21 +16,22 @@ public class BonusControler : MonoBehaviour {
     public System.Collections.Generic.Dictionary<string,Items> items_D = new System.Collections.Generic.Dictionary<string, Items>();
     //Bonus Coin
     //public int coinValue = 0;   
-    public Image coinImage;     // для класса CoinItem
+    public Image coinImage;         // для класса CoinItem
     public Text numCoinGameText;    // для класса CoinItem
     public Text numCoinTaskText;    // для класса CoinItem
 
     // Use this for initialization
-    void Start () {
+    void Start()
+    {
         //while (items_D == null)
         {
+            PoolReference.TableScene["DeathLine"].GetComponent<LoadStats>().LoadFromFile();
             try
             {
-                items_D.Add("CoinItems", new CoinItems(numCoinGameText, numCoinTaskText, coinImage));
+                items_D.Add( "CoinItems", new CoinItems( numCoinGameText, numCoinTaskText, coinImage ) );
                 WI = new WingsItems();
-                items_D.Add("WingsItems", WI);
-            }
-            catch (ArgumentException)
+                items_D.Add( "WingsItems", WI );
+            } catch( ArgumentException )
             {
                 print( "Oбъект CoinItems уже добавлен " );
             }
@@ -39,28 +41,27 @@ public class BonusControler : MonoBehaviour {
     }
 
     // Update is called once per frame
-    void Update () 
-	{
+    void Update()
+    {
         try
         {
             //if(amountOfBonuses != 0)
-               // WI.Amount = amountOfBonuses;
+            // WI.Amount = amountOfBonuses;
             WI.FlyEnabled();
             //amountOfBonuses = WI.Amount;
-        }
-        catch(NullReferenceException)
+        } catch( NullReferenceException )
         {
-            print(" WI == null");
+            print( " WI == null" );
         }
-        
+
 
     }
 
     void ShowMeRepeat()
     {
         var items = items_D["CoinItems"];
-        
+
         items.Show();
     }
-    
+
 }
