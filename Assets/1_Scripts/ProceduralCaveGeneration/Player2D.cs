@@ -4,13 +4,13 @@ using System.Collections;
 public class Player2D : MonoBehaviour
 {
 
-    Rigidbody2D rigidbody;
+    Rigidbody2D player2Drigidbody;
     Vector2 velosity;
 
     // Use this for initialization
     void Start()
     {
-        rigidbody = GetComponent<Rigidbody2D>();
+        player2Drigidbody = GetComponent<Rigidbody2D>();
 
     }
 
@@ -21,6 +21,6 @@ public class Player2D : MonoBehaviour
     }
     void FixedUpdate()
     {
-        rigidbody.MovePosition( rigidbody.position + velosity * Time.fixedDeltaTime );
+        player2Drigidbody.MovePosition( player2Drigidbody.position + velosity * Time.fixedDeltaTime );
     }
 }

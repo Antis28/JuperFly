@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.Audio;
+using UnityEngine.SceneManagement;
 
 public class PlayMusic : MonoBehaviour {
 
@@ -31,10 +32,10 @@ public class PlayMusic : MonoBehaviour {
 
 	public void PlayLevelMusic()
 	{
-		//This switch looks at the last loadedLevel number using the scene index in build settings to decide which music clip to play.
-		switch (Application.loadedLevel) 
-		
-		{
+        //This switch looks at the last loadedLevel number using the scene index in build settings to decide which music clip to play.
+        //switch (Application.loadedLevel) 
+        switch( SceneManager.GetActiveScene().buildIndex )
+        {
 			//If scene index is 0 (usually title scene) assign the clip titleMusic to musicSource
 			case 0:
 				musicSource.clip = titleMusic;

@@ -10,6 +10,9 @@ public enum EnumInPool
     TaskCanvas,
     InputManeger,
     CoinText,
-    BonusFlyText
+    BonusFlyText,
+    GameCanvas,
+    hero,
+        DialCanvas
 
 }

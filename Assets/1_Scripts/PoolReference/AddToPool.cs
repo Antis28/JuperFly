@@ -14,7 +14,7 @@ public class AddToPool : MonoBehaviour {
         } catch( NullReferenceException )
         {
             print( "Нет ссылки на объект " );
-        } catch( ArgumentException ex )
+        } catch
         {
             print( "Такой ключ уже существует: "  + this.name);
         }
